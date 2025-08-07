@@ -1,63 +1,87 @@
-# Logistic Regression Model for Tumor Prediction
-This project uses logistic regression to predict whether a tumor is malignant or benign based on various features of cell nuclei obtained from digitized images of a fine needle aspirate (FNA) of a breast mass. The model achieves high accuracy by analyzing and tuning features from the Breast Cancer Wisconsin dataset.
+# Breast Cancer Prediction with a Neural Network
 
-# Project Overview
-This notebook demonstrates:
+This project details the development of a neural network model to predict whether a breast tumor is malignant or benign based on diagnostic medical measurements. The model was trained on the Breast Cancer Wisconsin (Diagnostic) Dataset from Kaggle and achieved an F1-score of **0.974** on the test set, demonstrating high accuracy and reliability.
 
-- Loading and preprocessing data.
-- Implementing logistic regression from scratch with L2 regularization (ridge regularization).
-- Training, evaluating, and interpreting the logistic regression model.
-- Achieving a high prediction accuracy on both training and test sets.
+This repository contains two versions of the project:
+1.  A baseline **Logistic Regression** model.
+2.  An improved **Neural Network** model built with PyTorch/TensorFlow.
 
-# Dataset
-The dataset used is the Breast Cancer Wisconsin (Diagnostic) Dataset. This dataset is publicly available on Kaggle and includes 569 samples with 30 features. Each sample is labeled as either malignant (M) or benign (B), which are converted to 1 and 0 for the model, respectively.
+---
 
-# Key Features
-Radius Mean: Mean of distances from center to points on the perimeter.
-Texture Mean: Standard deviation of gray-scale values.
-Smoothness Mean: Local variation in radius lengths.
+## Table of Contents
+- [Project Goal](#project-goal)
+- [Methodology](#methodology)
+- [Model Performance](#model-performance)
+- [Installation](#installation)
+- [Usage](#usage)
 
-# Model Implementation
-The model uses logistic regression to classify each sample as either malignant or benign. It includes the following steps:
-- Sigmoid Function: Used as the activation function to output probabilities between 0 and 1.
-- Cost Function: Calculates the binary cross-entropy (log loss), with an additional term for L2 regularization to penalize large weights.
-- Gradient Descent: Updates weights and bias using gradient descent, accounting for L2 regularization.
-- Regularization: L2 regularization is applied to reduce overfitting by penalizing high weight values.
+---
 
-# Model Performance
-Training Accuracy: 93.7%
-Test Accuracy: 94.7%
-The high accuracy on both training and test sets suggests the model generalizes well to new data.
+## Project Goal
+The objective was to build and evaluate a robust machine learning model capable of accurately classifying breast tumors from a set of 30 diagnostic features. The primary focus was on maximizing **recall** to ensure that the model could correctly identify as many malignant cases as possible, minimizing the risk of false negatives.
 
-# Project Structure
-logistic_regression_tumor_prediction.ipynb: The main notebook containing the full code for data loading, preprocessing, model implementation, training, and evaluation.
-README.md: Project documentation (this file).
-data.csv: data from the Breast Cancer Wisconsin (Diagnostic) Data Set
+---
 
-# Getting Started
-To run this project, you need the following setup:
+## Methodology
 
-Google Colab or a local environment with Jupyter Notebook.
-Python 3.7+ and the following packages:
-- numpy
-- pandas
-- scikit-learn (if you use it for data preprocessing)
+The project followed a standard machine learning workflow:
 
-# Running the Notebook on Colab
-Upload the notebook to Google Colab.
-If you use a dataset from Google Drive, mount the drive and set the path to the dataset in the notebook.
-Run the cells sequentially to train and evaluate the model.
+1.  **Data Exploration (EDA):** The dataset was analyzed to understand feature distributions, correlations, and the balance between the target classes (Malignant vs. Benign).
 
-# Results
-The model achieved the following results:
-Training Accuracy: 93.7%
-Testing Accuracy: 94.7%
+2.  **Data Preprocessing:**
+    * The categorical target variable (`diagnosis`) was encoded into numerical format (0 for Benign, 1 for Malignant).
+    * Features were scaled using `StandardScaler` to normalize their ranges, which is crucial for neural network performance.
+    * The data was split into an 80% training set and a 20% testing set, using stratification to maintain the original class distribution in both sets.
 
-# Future Improvements
-Experiment with additional features or feature engineering.
-Implement cross-validation to fine-tune the regularization parameter.
-Explore other classification algorithms, such as SVM or decision trees, to compare performance.
+3.  **Model Architecture:**
+    * A sequential neural network was designed with an input layer, two hidden layers using the `ReLU` activation function (16 and 8 neurons, respectively), and a final output layer.
+    * The output layer uses a single neuron with a `Sigmoid` activation function to produce a probability score between 0 and 1.
 
-# License
-This project is licensed under the MIT License.
+4.  **Training and Evaluation:**
+    * The model was trained using the **Adam optimizer** and **Binary Cross-Entropy** loss function.
+    * Performance was evaluated on the unseen test set using key classification metrics, including a detailed classification report and a confusion matrix.
 
+---
+
+## Model Performance
+
+The final model achieved the following performance on the test set:
+
+* **Accuracy:** 98%
+* **Precision (Malignant):** 1.00
+* **Recall (Malignant):** 0.95
+* **F1-Score (Malignant):** 0.974
+
+### Confusion Matrix
+The confusion matrix below visualizes the model's predictions on the test set, highlighting its strong ability to correctly identify both benign and malignant cases while making very few errors.
+
+*(You can add a screenshot of your confusion matrix visualization here)*
+
+---
+
+## Installation
+
+To set up the environment and run this project locally, please follow these steps. This project was developed using Python 3.12.
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/VinayRatnam/logistic-regression-tumor-prediction.git](https://github.com/VinayRatnam/logistic-regression-tumor-prediction.git)
+    cd logistic-regression-tumor-prediction
+    ```
+
+2.  **Install the required packages:**
+    This command will install all the necessary libraries listed in the `requirements.txt` file.
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+---
+
+## Usage
+The primary code for this project is contained within the Jupyter Notebook located in the `neural_network_model/` directory. To use it, simply launch Jupyter Notebook and open the file.
+
+```bash
+jupyter notebook
+```
+
+You can then run the cells sequentially to load the data, preprocess it, train the model, and view the evaluation results.
