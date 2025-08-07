@@ -50,14 +50,15 @@ The project followed a standard machine learning workflow:
 The final, fine-tuned model achieved the following performance on the test set:
 
 * **Accuracy:** 99%
-* **Precision (Malignant):** 0.98
-* **Recall (Malignant):** 1.00
+* **Precision (Malignant):** 1.00
+* **Recall (Malignant):** 0.98
 * **F1-Score (Malignant):** 0.988
 
 ### Confusion Matrix
 The confusion matrix below visualizes the model's predictions on the test set, highlighting its strong ability to correctly identify both benign and malignant cases while making very few errors.
 
-*(You can add a screenshot of your confusion matrix visualization here)*
+<img width="1006" height="788" alt="image" src="https://github.com/user-attachments/assets/925e4263-35c8-4884-a75d-4875b861cb9b" />
+
 
 ---
 
